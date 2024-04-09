@@ -6,7 +6,7 @@
 
     <main>
       <section>
-
+        <Content></Content>
       </section>
     </main>
   </div>
@@ -15,6 +15,7 @@
 <script setup lang="ts">
 
   import Menu from "~/components/header/Menu.vue";
+  import Content from "~/components/content/Content.vue";
 
 </script>
 

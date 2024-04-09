@@ -13,8 +13,12 @@
       <button></button>
     </div>
 
-    <div class="menu-ui__mobile">
-
+    <div class="menu-ui__mobile"
+         :class="{active: menu}"
+         @click="openMenu">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
     </div>
 
   </div>
@@ -22,6 +26,14 @@
 </template>
 
 <script setup lang="ts">
+
+  import {ref} from "vue"
+
+  let menu = ref(false)
+
+  let openMenu = () => {
+    menu.value = !menu.value
+  }
 
 </script>
 
@@ -49,6 +61,38 @@
 
       &__mobile{
         display: none;
+
+        .line{
+          position: absolute;
+          width: 40px;
+          height: 4px;
+          background-color: #454444;
+          border-radius: 4px;
+          transition: 0.5s;
+
+          &:nth-child(1){
+            transform: translateY(-15px);
+          }
+          &:nth-child(2){
+            transform: translateY(15px);
+          }
+        }
+
+        &.active{
+          .line{
+            &:nth-child(1){
+              transform: translateY(0) rotate(45deg);
+              transition-delay: 0.125s;
+            }
+            &:nth-child(3){
+              transform: translateX(60px);
+            }
+            &:nth-child(2){
+              transform: translateY(0) rotate(315deg);
+              transition-delay: 0.25s;
+            }
+          }
+        }
       }
     }
   }
