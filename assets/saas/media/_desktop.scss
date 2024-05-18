@@ -1,0 +1,7 @@
+@import "../mixin/_mixin.scss";
+
+@include desktop{
+    .title_h2{
+      font-size:calc(24px + 8 * (100vw - 320px) / 880);
+   }
+}

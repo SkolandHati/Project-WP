@@ -1,0 +1,56 @@
+
+.title{
+  //font-family: 'Graphik LCG', sans-serif, Arial;
+
+  &_h1{
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+  }
+
+  &_h2{
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+
+  &_h3{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+
+  &_h4{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+}
+
+.text{
+  font-family: 'Graphik LCG', sans-serif, Arial;
+
+  &_lead{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+
+  &_lg{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+
+  &_md{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+
+  &_sm{
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+}
