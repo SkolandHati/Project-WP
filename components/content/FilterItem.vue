@@ -2,33 +2,53 @@
   <div class="filter-item">
     <h2 class="title-head title_h2">Most Recent Orders</h2>
 
-      <div class="user-status">
-        <h3>Online Status</h3>
+    <div class="user-status">
+      <h3>Online Status</h3>
 
-        <div class="container-buttons-one">
-          <span class="on-site"><a>On Site</a></span>
-          <span class="in-game">In Game</span>
-        </div>
-
-      </div>
-
-      <div class="type-order">
-        <h3>Order Buy</h3>
-
-        <div class="container-buttons-two">
-          <span class="sell">Sell</span>
-          <span class="buy">Buy</span>
-        </div>
-
+      <div class="container-buttons-one">
+          <span class="on-site"
+                :class="{isActive: status_user}"
+                @click="user">On Site</span>
+        <span class="in-game"
+              :class="{isNotActive: !status_user}"
+              @click="user">In Game</span>
       </div>
 
     </div>
+
+    <div class="type-order">
+      <h3>Order Buy</h3>
+
+      <div class="container-buttons-two">
+          <span class="sell"
+                :class="{isActive: status_order}"
+                @click="order">Sell</span>
+        <span class="buy"
+              :class="{isNotActive: !status_order}"
+              @click="order">Buy</span>
+      </div>
+
+    </div>
+
+  </div>
 
 </template>
 
 <script setup lang="ts">
 
-  let status = true
+
+  import {ref} from "vue"
+
+  let status_user = ref(true)
+  let status_order = ref(true)
+
+  let user = () => {
+    status_user.value = !status_user.value
+  }
+
+  let order = function () {
+    status_order.value = !status_order.value
+  }
 
 </script>
 
@@ -38,7 +58,7 @@
 
   @include desktop;
 
-  .filter-item{
+  .filter-item {
     background-color: #313142;
     display: grid;
     min-width: 100%;
@@ -47,28 +67,28 @@
     gap: 15px;
     color: #ffffff;
 
-    .title-head{
+    .title-head {
       text-align: center;
       padding-top: 5px;
     }
 
-    .user-status,.type-order{
-      h3{
+    .user-status, .type-order {
+      h3 {
         text-align: center;
       }
 
-      .container-buttons-one,.container-buttons-two{
+      .container-buttons-one, .container-buttons-two {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 15px 20px;
         align-items: center;
         gap: 15px;
 
-        span:first-child{
+        span:first-child {
           background-color: #63b88d;
         }
 
-        span{
+        span {
           position: relative;
           display: grid;
           grid-template-columns: 10px auto;
@@ -85,21 +105,22 @@
           color: black;
           transition: all 500ms ease;
           border: 1px solid transparent;
+          border-radius: 2px;
 
-          &:first-child:hover{
+          &:first-child:hover {
             cursor: pointer;
             transition: all 500ms ease;
             background-color: rgb(103, 85, 243);
             border: 1px solid #5e589c;
           }
 
-          &:hover{
+          &:hover {
             cursor: pointer;
             transition: all 500ms ease;
             background-color: #1280d6;
             border: 1px solid #55a3ec;
 
-            &::before{
+            &::before {
               content: "";
               margin-top: 9px;
               float: right;
@@ -111,19 +132,45 @@
               border-radius: 50%;
             }
           }
-        &::before{
-          content: "";
-          margin-top: 9px;
-          float: right;
-          width: 10px;
-          height: 10px;
-          color: #000000;
-          border: 2px solid #000000;
-          border-radius: 50%;
+
+          &::before {
+            content: "";
+            margin-top: 9px;
+            float: right;
+            width: 10px;
+            height: 10px;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 50%;
+          }
+        }
+
+        .on-site,.sell {
+          &.isActive {
+            background-color: rgb(103, 85, 243);
+            border: 1px solid #5e589c;
+
+            &::before {
+              color: #545497;
+              border: 2px solid #545497;
+              background-color: black;
+            }
+          }
+        }
+        .in-game,.buy {
+          &.isNotActive {
+            background-color: #1280d6;
+            border: 1px solid #55a3ec;
+
+            &::before {
+              color: #545497;
+              border: 2px solid #545497;
+              background-color: black;
+            }
+          }
         }
       }
     }
   }
-}
 
 </style>

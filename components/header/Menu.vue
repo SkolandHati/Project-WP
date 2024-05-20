@@ -44,6 +44,7 @@
   @include mobile;
 
   .header__menu{
+    background-color: #313142;
     display: flex;
     justify-content: space-between;
 
