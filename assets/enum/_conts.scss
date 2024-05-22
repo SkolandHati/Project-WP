@@ -1,0 +1,26 @@
+*{
+ margin: 0;
+ padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+ margin: 0;
+ padding: 0;
+}
+
+//Повсеместный цвет элементов
+$base_color: #313142;
+
+//Стиль активного состояния FilterOrder правых кнопок
+
+$bg_color__active_state: rgb(103, 85, 243);
+$border_ui__active_state: '1px solid #5e589c';
+
+$before_element_color__active_state: #545497;
+$before_element_border__active_state: 2px solid #545497;
+$before_element_background-color__active_state: #000000FF;
+
+
+
+
+

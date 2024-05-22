@@ -17,7 +17,9 @@
     </div>
 
     <div class="order-button">
-      <span class="sell-buy">ergreg</span>
+      <button class="button-action">
+        ergreg
+      </button>
     </div>
 
     <div class="info-user">
@@ -67,11 +69,15 @@
     }
 
     .order-button{
-      width: 100%;
-      height: 30px;
-      margin: auto;
-      margin-top: 50%;
-      background-color: chartreuse;
+      .button-action{
+        width: 100%;
+        height: 30px;
+        margin: auto;
+        margin-top: 50%;
+        background-color: chartreuse;
+        text-align: center;
+        border: 0 solid;
+      }
     }
 
     .info-user{

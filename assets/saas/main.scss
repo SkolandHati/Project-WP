@@ -1,3 +1,5 @@
 @import "media/mobile";
 @import "fonts/font_style";
-@import "conts";
+@import "mixin/media_query_mixin/mixin";
+@import "mixin/ui_mixin/ui_mixin";
+@import "../enum/conts";

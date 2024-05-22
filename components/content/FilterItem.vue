@@ -6,12 +6,10 @@
       <h3>Online Status</h3>
 
       <div class="container-buttons-one">
-          <span class="on-site"
-                :class="{isActive: status_user}"
-                @click="user">On Site</span>
-        <span class="in-game"
-              :class="{isNotActive: !status_user}"
-              @click="user">In Game</span>
+        <UiButtonsFilterOrder v-for="(item, index) in filter_status_user"
+              :key="index"
+              :is-active-right="item"
+              @click="checked_button"></UiButtonsFilterOrder>
       </div>
 
     </div>
@@ -20,12 +18,10 @@
       <h3>Order Buy</h3>
 
       <div class="container-buttons-two">
-          <span class="sell"
-                :class="{isActive: status_order}"
-                @click="order">Sell</span>
-        <span class="buy"
-              :class="{isNotActive: !status_order}"
-              @click="order">Buy</span>
+        <UiButtonsFilterOrder v-for="(item, index) in filter_status_order"
+              :key="index"
+              :is-active-right="item"
+              @click="checked_button_two"></UiButtonsFilterOrder>
       </div>
 
     </div>
@@ -36,25 +32,58 @@
 
 <script setup lang="ts">
 
+  import UiButtonsFilterOrder from "~/components/kit/UiButtonsFilterOrder.vue";
+  import {ref, reactive} from "vue"
 
-  import {ref} from "vue"
+  let filter_status_user = reactive([
+    {
+      status: true,
+      label: "On Site"
+    },
+    {
+      status: false,
+      label: "In Game"
+    },
+  ])
 
-  let status_user = ref(true)
-  let status_order = ref(true)
+  let filter_status_order = reactive([
+    {
+      status: true,
+      label: "Order Buy"
+    },
+    {
+      status: false,
+      label: "Order Sell"
+    }
+  ])
 
-  let user = () => {
-    status_user.value = !status_user.value
+  let checked_button = () => {
+    if (filter_status_user[0].status === true) {
+      filter_status_user[0].status = false
+      filter_status_user[1].status = true
+    }
+    else {
+      filter_status_user[0].status = true
+      filter_status_user[1].status = false
+    }
   }
 
-  let order = function () {
-    status_order.value = !status_order.value
+  let checked_button_two = () => {
+    if (filter_status_order[0].status === true) {
+      filter_status_order[0].status = false
+      filter_status_order[1].status = true
+    }
+    else {
+      filter_status_order[0].status = true
+      filter_status_order[1].status = false
+    }
   }
 
 </script>
 
 <style scoped lang="scss">
 
-  @import "assets/saas/media/desktop";
+  @import "../../assets/saas/media/desktop";
 
   @include desktop;
 
@@ -83,92 +112,6 @@
         grid-template-rows: 15px 20px;
         align-items: center;
         gap: 15px;
-
-        span:first-child {
-          background-color: #63b88d;
-        }
-
-        span {
-          position: relative;
-          display: grid;
-          grid-template-columns: 10px auto;
-          justify-content: center;
-          text-align: center;
-          line-height: 30px;
-          width: 80%;
-          gap: 10px;
-          margin: auto;
-          margin-top: 10px;
-          max-width: 200px;
-          height: 35px;
-          background-color: #75d6e6;
-          color: black;
-          transition: all 500ms ease;
-          border: 1px solid transparent;
-          border-radius: 2px;
-
-          &:first-child:hover {
-            cursor: pointer;
-            transition: all 500ms ease;
-            background-color: rgb(103, 85, 243);
-            border: 1px solid #5e589c;
-          }
-
-          &:hover {
-            cursor: pointer;
-            transition: all 500ms ease;
-            background-color: #1280d6;
-            border: 1px solid #55a3ec;
-
-            &::before {
-              content: "";
-              margin-top: 9px;
-              float: right;
-              width: 10px;
-              height: 10px;
-              color: #545497;
-              border: 2px solid #545497;
-              background-color: black;
-              border-radius: 50%;
-            }
-          }
-
-          &::before {
-            content: "";
-            margin-top: 9px;
-            float: right;
-            width: 10px;
-            height: 10px;
-            color: #000000;
-            border: 2px solid #000000;
-            border-radius: 50%;
-          }
-        }
-
-        .on-site,.sell {
-          &.isActive {
-            background-color: rgb(103, 85, 243);
-            border: 1px solid #5e589c;
-
-            &::before {
-              color: #545497;
-              border: 2px solid #545497;
-              background-color: black;
-            }
-          }
-        }
-        .in-game,.buy {
-          &.isNotActive {
-            background-color: #1280d6;
-            border: 1px solid #55a3ec;
-
-            &::before {
-              color: #545497;
-              border: 2px solid #545497;
-              background-color: black;
-            }
-          }
-        }
       }
     }
   }

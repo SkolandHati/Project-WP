@@ -1,0 +1,14 @@
+//Миксин для кнопок
+
+@mixin ui_buttons_active ($bg_color,$border_ui,
+                          $before_element_color,
+                          $before_element_border,
+                          $before_element_bg-color){
+   background-color: $bg_color;
+   border: $border_ui;
+   &::before{
+     color: $before_element_color;
+     border: $before_element_border;
+     background-color: $before_element_bg-color;
+   }
+}

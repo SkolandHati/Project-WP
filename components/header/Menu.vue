@@ -39,7 +39,7 @@
 
 <style scoped lang="scss">
 
-  @import "assets/saas/media/mobile";
+  @import "../../assets/saas/media/mobile";
   
   @include mobile;
 
