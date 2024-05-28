@@ -46,7 +46,7 @@
       cursor: pointer;
       transition: all 500ms ease;
       background-color: rgb(103, 85, 243);
-      border: 1px solid #5e589c;
+      border: 1px solid #63b88d;
     }
 
     &:hover {

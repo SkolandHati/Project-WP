@@ -9,17 +9,15 @@
       </div>
 
       <div class="product-description">
-        <h2 class="name-product">Arcana</h2>
-        <p class="piece-product">1</p>
-        <p class="price-product">25 Platinum each</p>
+        <h2 class="name-product">{{name_to_uppercase}}</h2>
+        <p class="piece-product">{{props.product.piece}}</p>
+        <p class="price-product">{{props.product.price_product}} Platinum each</p>
       </div>
 
     </div>
 
     <div class="order-button">
-      <button class="button-action">
-        ergreg
-      </button>
+      <ui-order-button></ui-order-button>
     </div>
 
     <div class="info-user">
@@ -31,6 +29,30 @@
 </template>
 
 <script setup lang="ts">
+
+import {computed} from "vue";
+import UiOrderButton from "~/components/kit/UiOrderButton.vue";
+
+const props = defineProps({
+    product:{
+      required: true,
+      type: Object
+    }
+  })
+
+
+  const name_to_uppercase = computed(() => {
+    if (props.product.item_name) {
+      let data = props.product.item_name[0].toUpperCase().slice(1)
+      console.log(data)
+      return data
+    }
+    else {
+      return "Not Name"
+    }
+  })
+
+console.log(name_to_uppercase.value)
 
 </script>
 
@@ -68,23 +90,10 @@
       }
     }
 
-    .order-button{
-      .button-action{
-        width: 100%;
-        height: 30px;
-        margin: auto;
-        margin-top: 50%;
-        background-color: chartreuse;
-        text-align: center;
-        border: 0 solid;
-      }
-    }
-
     .info-user{
       display: flex;
       grid-column: 1/-1;
-      padding: 10px;
-      padding-left: 0;
+      padding: 10px 0 0 0;
     }
   }
 
