@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 
-  import Menu from "~/components/header/Menu.vue";
+  import Menu from "~/components/header/HeaderPanel.vue";
   import Content from "~/components/content/Content.vue";
 
 </script>

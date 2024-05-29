@@ -8,7 +8,7 @@
 
     <div class="container-order-unit">
       <OrderUnit class="orders"
-                 v-for="(item, index) in spisok"
+                 v-for="(item, index) in state.products"
                  :key="index"
                  :product="item"></OrderUnit>
     </div>
@@ -19,39 +19,11 @@
 
   import FilterItem from "./FilterItem.vue"
   import OrderUnit from "~/components/content/OrderUnit.vue";
+  import {useStore} from "~/store/pinia/store"
 
-  const spisok = [
-    {
-      item_name: "efwfefew",
-      piece: 4,
-      price_product: 250
-    },
-    {
-      item_name: "effewfewe34324",
-      piece: 1,
-      price_product: 241
-    },
-    {
-      item_name: "QWEEWw",
-      piece: 5,
-      price_product: 765
-    },
-    {
-      item_name: "QR34tgefg",
-      piece: 2,
-      price_product: 12900
-    },
-    {
-      item_name: "QWEEWw",
-      piece: 5,
-      price_product: 765
-    },
-    {
-      item_name: "QR34tgefg",
-      piece: 2,
-      price_product: 12900
-    }
-  ]
+  const state = useStore().$state
+
+  console.log(state)
 
 </script>
 

@@ -91,7 +91,7 @@
     background-color: #313142;
     display: grid;
     min-width: 100%;
-    margin: 20px -12px 0 -12px;
+    margin: 12px -12px 0 -12px;
     padding-bottom: 15px;
     gap: 15px;
     color: #ffffff;

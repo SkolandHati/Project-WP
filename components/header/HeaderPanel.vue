@@ -1,27 +1,27 @@
 <template>
 
-  <div class="header__menu">
+  <nav class="header__menu">
 
     <div class="menu-logo">
       <h1>Logo</h1>
     </div>
 
-    <div class="menu-ui__desktop">
+    <menu class="menu-ui__desktop">
       <button></button>
       <button></button>
       <button></button>
       <button></button>
-    </div>
+    </menu>
 
-    <div class="menu-ui__mobile"
+    <menu class="menu-ui__mobile"
          :class="{active: menu}"
          @click="openMenu">
       <span class="line"></span>
       <span class="line"></span>
       <span class="line"></span>
-    </div>
+    </menu>
 
-  </div>
+  </nav>
 
 </template>
 

@@ -43,8 +43,7 @@
 
   const name_to_uppercase = computed(() => {
     if (props.product.item_name) {
-      let data = props.product.item_name[0].toUpperCase().slice(1)
-      console.log(data)
+      let data = props.product.item_name[0].toUpperCase() + props.product.item_name.slice(1)
       return data
     }
     else {
