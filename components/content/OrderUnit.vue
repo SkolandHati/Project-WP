@@ -30,15 +30,15 @@
 
 <script setup lang="ts">
 
-import {computed} from "vue";
-import UiOrderButton from "~/components/kit/UiOrderButton.vue";
+  import {computed} from "vue";
+  import UiOrderButton from "~/components/kit/UiOrderButton.vue";
 
-const props = defineProps({
-    product:{
-      required: true,
-      type: Object
-    }
-  })
+  const props = defineProps({
+      product:{
+        required: true,
+        type: Object
+      }
+    })
 
 
   const name_to_uppercase = computed(() => {
