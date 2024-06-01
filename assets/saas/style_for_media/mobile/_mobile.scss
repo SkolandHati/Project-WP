@@ -1,0 +1,19 @@
+@import "../../mixin/media_query_mixin/mixin";
+
+@include mobile {
+  .page {
+    width: 95%;
+    padding: 0 2.5% 0 2.5%;
+    overflow: hidden;
+
+    .header__menu {
+      .menu-ui {
+
+        &__desktop {
+          display: none;
+        }
+
+      }
+    }
+  }
+}

@@ -23,8 +23,6 @@
 
   const state = useStore().$state
 
-  console.log(state)
-
 </script>
 
 <style scoped lang="scss">

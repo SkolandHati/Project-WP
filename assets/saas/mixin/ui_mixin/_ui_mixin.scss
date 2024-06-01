@@ -1,7 +1,7 @@
 //Миксин для кнопок
 
 @mixin ui_buttons_active ($bg_color,$border_ui, $before_element_color,
-                          $before_element_border, $before_element_bg-color){
+                          $before_element_border, $before_element_bg-color) {
    background-color: $bg_color;
    border: $border_ui;
    &::before{
@@ -9,4 +9,15 @@
      border: $before_element_border;
      background-color: $before_element_bg-color;
    }
+}
+
+//Миксин для анимации выпадающего меню
+@mixin ui_dropMenu_animation($animation_name) {
+  animation-name: $animation_name;
+  -webkit-animation-name: $animation_name;
+  animation-timing-function: ease-out;
+  animation-duration: 300ms;
+  transform-origin: 50% 0%;
+
+
 }

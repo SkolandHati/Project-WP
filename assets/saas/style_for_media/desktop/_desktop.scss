@@ -1,0 +1,17 @@
+@import "../../mixin/media_query_mixin/mixin";
+
+@include desktop{
+  .page {
+    .header__menu {
+       .menu-ui {
+
+         &__mobile {
+           display: none;
+         }
+       }
+    }
+  }
+    .title_h2{
+      font-size:calc(24px + 8 * (100vw - 320px) / 880);
+   }
+}

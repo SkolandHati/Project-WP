@@ -83,7 +83,7 @@
 
 <style scoped lang="scss">
 
-  @import "../../assets/saas/media/desktop";
+  @import "../../assets/saas/style_for_media/desktop/desktop";
 
   @include desktop;
 

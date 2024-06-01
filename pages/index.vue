@@ -21,7 +21,7 @@
 
 <style scoped lang="scss">
 
-  @import "assets/saas/media/mobile";
+  @import "assets/saas/style_for_media/mobile/mobile";
 
   @include mobile;
 
