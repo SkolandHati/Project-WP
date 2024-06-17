@@ -19,7 +19,7 @@
 
   import FilterItem from "./FilterItem.vue"
   import OrderUnit from "~/components/content/OrderUnit.vue";
-  import {useStore} from "~/store/pinia/store"
+  import {useStore} from "~/store/pinia/StoreProducts"
 
   const state = useStore().$state
 

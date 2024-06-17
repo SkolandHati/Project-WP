@@ -1,3 +1,9 @@
+Цвета для секции контента
+
 base color = #313142
 
-child color =
+child color = #6161AF3F
+
+Бекграунд цвет для выпадающего меню
+
+dropMenuBgColor = #3D3D5EFF

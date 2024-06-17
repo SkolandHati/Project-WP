@@ -127,10 +127,12 @@
         from {
           transform: scaleY(1);
           opacity: 1;
+          top: 115%;
         }
         to {
           transform: scaleY(0);
           opacity: 1;
+          top: 115%;
         }
       }
 
@@ -138,10 +140,6 @@
         display: grid;
         opacity: 1;
         top: 115%;
-        animation-name: fadeInDown;
-        -webkit-animation-name: fadeInDown;
-        animation-timing-function: ease-out;
-        animation-duration: 300ms;
         transform-origin: 50% 0%;
 
         @include ui_dropMenu_animation(fadeInDown);

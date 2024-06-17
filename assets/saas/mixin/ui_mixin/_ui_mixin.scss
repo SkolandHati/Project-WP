@@ -15,9 +15,7 @@
 @mixin ui_dropMenu_animation($animation_name) {
   animation-name: $animation_name;
   -webkit-animation-name: $animation_name;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-in-out;
   animation-duration: 300ms;
   transform-origin: 50% 0%;
-
-
 }
