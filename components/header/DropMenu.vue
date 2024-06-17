@@ -29,10 +29,16 @@
 
 <script setup lang="ts">
 
-  import {ref, reactive} from "vue";
   import {useStore} from "~/store/pinia/StoreUserData"
 
   const user_sate = useStore().$state.user.token;
+
+  // const props = defineProps({
+  //   display: {
+  //     type: Boolean,
+  //     required: true,
+  //   }
+  // })
 
 </script>
 
