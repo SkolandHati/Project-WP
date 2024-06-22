@@ -1,6 +1,6 @@
 <template>
   <nav class="menu">
-    <ul v-if="user_sate" class="list-items__authenticated">
+    <ul v-if="user_data.token" class="list-items__authenticated">
       <li class="item">
         <a>Профиль</a>
       </li>
@@ -16,10 +16,12 @@
     </ul>
 
     <ul v-else class="list-items__guest">
-      <li class="item">
+      <li class="item"
+          @click="user_profile">
         <a>Войти</a>
       </li>
-      <li class="item">
+      <li class="item"
+          @click="go_register">
         <a>Зарегистрироваться</a>
       </li>
     </ul>
@@ -29,16 +31,20 @@
 
 <script setup lang="ts">
 
-  import {useStore} from "~/store/pinia/StoreUserData"
+  import {useStore} from "~/store/pinia/StoreUserData";
+  import {useRouter} from "vue-router";
 
-  const user_sate = useStore().$state.user.token;
+  const user_data = useStore().$state.user;
 
-  // const props = defineProps({
-  //   display: {
-  //     type: Boolean,
-  //     required: true,
-  //   }
-  // })
+  const route = useRouter();
+
+  const user_profile = async () => {
+    await route.push(`/${user_data.nickname}`);
+  }
+
+  const go_register = async () => {
+    await route.push(`/register`);
+  }
 
 </script>
 

@@ -21,7 +21,7 @@
       <span class="line"></span>
     </menu>
 
-    <drop-menu class="drop-menu" :class="{open: menu, close: !menu}"></drop-menu>
+    <DropMenu class="drop-menu" :class="{open: menu, close: !menu}"></DropMenu>
 
   </nav>
 
@@ -113,18 +113,17 @@
     }
 
     .drop-menu {
-      display: none;
       width: 106%;
       height: auto;
       overflow: hidden;
       position: absolute;
+      display: none;
       opacity: 0;
       right: -1px;
       z-index: 1;
       top: -200%;
 
       &.close {
-
         @include ui_dropMenu_animation(fadeInUp);
         @keyframes fadeInUp {
           from {
@@ -141,7 +140,7 @@
             transform: scaleY(0);
             opacity: 0;
             top: -200%;
-            display: grid;
+            display: none;
           }
         }
       }
@@ -150,13 +149,14 @@
         display: grid;
         opacity: 1;
         top: 115%;
-        transform-origin: 50% 0%;
+        transform-origin: 50% 0;
         bottom: -330%;
 
         @include ui_dropMenu_animation(fadeInDown);
         @keyframes fadeInDown {
           from {
             transform: scaleY(0);
+            display: none;
           }
           to {
             transform: scaleY(1);

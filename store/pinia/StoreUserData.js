@@ -4,9 +4,9 @@ export const useStore = defineStore('user', {
     state: () => ({
         user: {
             token: false,
-            firstName: "",
-            lastName: "",
-            nickname: "",
+            firstName: "Arma",
+            lastName: "Fingers",
+            nickname: "Mozanbic",
             isAdmin: false
         }
     }),
