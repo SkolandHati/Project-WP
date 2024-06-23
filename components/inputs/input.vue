@@ -1,10 +1,11 @@
 <template>
 
-  <label class="input_label"
-         :for="props.value.label"></label>
-  <input class="input"
-         :placeholder="props.value.placeholder"
-         :value="props.value.value"></input>
+  <div class="container-input">
+    <input class="input"
+           :value="props.value.value"></input>
+    <label class="input_label"
+           :for="props.value.label">{{props.value.label}}</label>
+  </div>
 
 </template>
 
@@ -18,7 +19,3 @@
   })
 
 </script>
-
-<style scoped lang="scss">
-
-</style>

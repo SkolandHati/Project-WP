@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 
-  import {ref, reactive} from "vue"
+  import {reactive} from "vue"
 
   const user_data = reactive([
     {
@@ -48,17 +48,54 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
+    margin: 20px 0 15px 0;
 
     .register-head {
       text-align: center;
     }
 
     .form-example {
-      
       .form-group {
         display: grid;
         grid-template-columns: 1fr;
+        gap: 40px;
+
+        :deep(.container-input) {
+          width: 100%;
+          display: grid;
+          position: relative;
+        }
+
+        &:deep(.input) {
+          width: 270px;
+          height: 35px;
+          border-radius: 5px;
+          border: 1px solid transparent;
+          transition: all 250ms ease-in-out;
+          background: #e1e1e1;
+          text-align: center;
+          font-size: 16px;
+
+          &:focus {
+            outline: none;
+            border: 1px solid #ffde00;
+          }
+        }
+
+        &:deep(.input_label) {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%, -50%);
+          transition: all 250ms ease-in-out;
+        }
+
+        &:deep(input:focus+.input_label) {
+          top: 0;
+          left: 0;
+          transform: translateY(-30px);
+        }
       }
     }
   }

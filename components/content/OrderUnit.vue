@@ -51,8 +51,6 @@
     }
   })
 
-console.log(name_to_uppercase.value)
-
 </script>
 
 <style scoped lang="scss">
