@@ -2,20 +2,37 @@
 
   <div class="container-input">
     <input class="input"
-           :value="props.value.value"></input>
+           :value="modelValue"
+           @input="$emit('update:modelValue', $event.target.value)"></input>
     <label class="input_label"
-           :for="props.value.label">{{props.value.label}}</label>
+           :for="label">{{label}}</label>
   </div>
 
 </template>
 
-<script setup lang="ts">
+<script setup>
+
+  import {watch, watchEffect} from "vue";
 
   const props = defineProps({
-    value: {
-      type: Object,
+    label: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      required: true,
+    },
+    modelValue: {
+      type: String,
       required: true,
     }
   })
+
+  const updateModelValue = (e) => {
+    emit('update:modelValue', e.target.value)
+  }
+
+  const emits = defineEmits(['update:modelValue'])
 
 </script>

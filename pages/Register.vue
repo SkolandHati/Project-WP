@@ -7,12 +7,16 @@
           method="post">
 
       <div class="form-group">
-        <inputs-input v-for="(item, index) in user_data"
+        <inputs-input v-for="(item, index) in this_input_data"
                       :key="index"
-                      :value="item"></inputs-input>
+                      :label="item.label"
+                      :placeholder="item.placeholder"
+                      v-model="item.value"></inputs-input>
       </div>
 
     </form>
+
+    <button class="btn" style="width: 80px; height: 40px;">REG</button>
 
   </div>
 
@@ -20,18 +24,18 @@
 
 <script setup lang="ts">
 
-  import {reactive} from "vue"
+import {reactive, ref, watch} from "vue"
 
-  const user_data = reactive([
+  const this_input_data = reactive([
     {
-      label: "Emali",
-      placeholder: "emali",
+      label: "Email",
+      placeholder: "email",
       value: ""
     },
     {
       label: "Password",
       placeholder: "password",
-      value: ""
+      value: "thrhrthrh"
     },
     {
       label: "Nickname",
@@ -48,7 +52,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 30px;
     margin: 20px 0 15px 0;
 
     .register-head {
@@ -94,6 +98,7 @@
         &:deep(input:focus+.input_label) {
           top: 0;
           left: 0;
+          color: rgba(225, 225, 225, 0.8);
           transform: translateY(-30px);
         }
       }
