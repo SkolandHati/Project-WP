@@ -7,11 +7,11 @@
           method="post">
 
       <div class="form-group">
-        <inputs-input v-for="(item, index) in this_input_data"
+        <inputs-input v-for="(item, index) in form_data"
                       :key="index"
                       :label="item.label"
                       :placeholder="item.placeholder"
-                      v-model="item.value"></inputs-input>
+                      v-model="user_data[item.placeholder]"></inputs-input>
       </div>
 
     </form>
@@ -22,28 +22,41 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup>
 
-import {reactive, ref, watch} from "vue"
+  import { reactive, ref, watch } from "vue"
+  import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
+  import { useVuelidate } from '@vuelidate/core';
 
-  const this_input_data = reactive([
+  const form_data = reactive([
     {
       label: "Email",
       placeholder: "email",
-      value: ""
     },
     {
       label: "Password",
       placeholder: "password",
-      value: "thrhrthrh"
     },
     {
       label: "Nickname",
       placeholder: "nickname",
-      value: ""
     }
   ])
 
+  const user_data = reactive({
+    email: "",
+    password: "",
+    nickname: ""
+  })
+
+  const rules = computed(() => {
+    return {
+      email: { required, email },
+      password: { required, minLength: minLength(6) },
+      nickname: { required, minLength: minLength(3) },
+    }
+  })
+  
 </script>
 
 <style scoped lang="scss">
@@ -84,6 +97,17 @@ import {reactive, ref, watch} from "vue"
           &:focus {
             outline: none;
             border: 1px solid #ffde00;
+          }
+
+          &::placeholder {
+            opacity: 0;
+          }
+
+          &:not(:placeholder-shown) ~ .input_label {
+            top: 0;
+            left: 0;
+            color: rgba(225, 225, 225, 0.8);
+            transform: translateY(-30px)
           }
         }
 

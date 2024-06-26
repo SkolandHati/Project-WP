@@ -2,6 +2,8 @@
 
   <div class="container-input">
     <input class="input"
+           required
+           :placeholder="placeholder"
            :value="modelValue"
            @input="$emit('update:modelValue', $event.target.value)"></input>
     <label class="input_label"
@@ -29,9 +31,9 @@
     }
   })
 
-  const updateModelValue = (e) => {
-    emit('update:modelValue', e.target.value)
-  }
+  // const updateModelValue = (e) => {
+  //   emit('update:modelValue', e.target.value)
+  // }
 
   const emits = defineEmits(['update:modelValue'])
 
