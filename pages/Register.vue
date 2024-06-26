@@ -11,7 +11,8 @@
                       :key="index"
                       :label="item.label"
                       :placeholder="item.placeholder"
-                      v-model="user_data[item.placeholder]"></inputs-input>
+                      v-model="v$[item.placeholder].$model"
+                      :error="v$[item.placeholder].$error"></inputs-input>
       </div>
 
     </form>
@@ -51,12 +52,19 @@
 
   const rules = computed(() => {
     return {
-      email: { required, email },
-      password: { required, minLength: minLength(6) },
-      nickname: { required, minLength: minLength(3) },
+      email: { required : helpers.withMessage('Поле электронной почты обязательное', required),
+               email:  helpers.withMessage('Invalid email format', email), },
+      password: { required: helpers.withMessage('Поле пароля обязательное', required),
+                  minLength: minLength(6) },
+      nickname: { required: helpers.withMessage('Поле никнейма обязательное', required),
+                  minLength: minLength(3) },
     }
   })
-  
+
+  const v$ = useVuelidate(rules, user_data)
+
+  console.log(v$.value.$model)
+
 </script>
 
 <style scoped lang="scss">
@@ -93,6 +101,10 @@
           background: #e1e1e1;
           text-align: center;
           font-size: 16px;
+
+          &.valid {
+            background: red;
+          }
 
           &:focus {
             outline: none;

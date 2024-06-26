@@ -1,13 +1,19 @@
 <template>
 
   <div class="container-input">
-    <input class="input"
+
+    <div class="form-error" v-if="error">
+      <span class="info-error">{{error}}</span>
+    </div>
+
+    <input class="input" :class="{valid: !!error}"
            required
            :placeholder="placeholder"
            :value="modelValue"
            @input="$emit('update:modelValue', $event.target.value)"></input>
     <label class="input_label"
            :for="label">{{label}}</label>
+
   </div>
 
 </template>
@@ -28,12 +34,11 @@
     modelValue: {
       type: String,
       required: true,
+    },
+    error: {
+      type: Boolean
     }
   })
-
-  // const updateModelValue = (e) => {
-  //   emit('update:modelValue', e.target.value)
-  // }
 
   const emits = defineEmits(['update:modelValue'])
 
