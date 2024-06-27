@@ -2,11 +2,15 @@
 
   <div class="container-input">
 
-    <div class="form-error" v-if="error">
-      <span class="info-error">{{error}}</span>
-    </div>
+    <TransitionGroup>
+      <div class="form-error"
+           v-for="element in errors"
+           :key="element.$uid">
+        <span class="info-error">* {{element.$message}}</span>
+      </div>
+    </TransitionGroup>
 
-    <input class="input" :class="{valid: !!error}"
+    <input class="input" :class="{invalid: !!errors.length, valid: !errors.length}"
            required
            :placeholder="placeholder"
            :value="modelValue"
@@ -19,8 +23,6 @@
 </template>
 
 <script setup>
-
-  import {watch, watchEffect} from "vue";
 
   const props = defineProps({
     label: {
@@ -35,8 +37,10 @@
       type: String,
       required: true,
     },
-    error: {
-      type: Boolean
+    errors: {
+      type: Array,
+      default: false,
+      required: true,
     }
   })
 

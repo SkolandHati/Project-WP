@@ -12,12 +12,15 @@
                       :label="item.label"
                       :placeholder="item.placeholder"
                       v-model="v$[item.placeholder].$model"
-                      :error="v$[item.placeholder].$error"></inputs-input>
+                      :errors="v$[item.placeholder].$errors"></inputs-input>
       </div>
 
     </form>
 
-    <button class="btn" style="width: 80px; height: 40px;">REG</button>
+    <UiButtonRegister>
+      <button class="go-register"
+              @click="go_register" :class="{active: active}">Зарегистрироваться</button>
+    </UiButtonRegister>
 
   </div>
 
@@ -25,9 +28,17 @@
 
 <script setup>
 
-  import { reactive, ref, watch } from "vue"
-  import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
+  import { reactive, ref } from "vue"
+  import { required, email, minLength, maxLength, helpers } from '@vuelidate/validators';
   import { useVuelidate } from '@vuelidate/core';
+  import UiButtonRegister from "~/components/kit/UiButtonRegister.vue";
+
+  const active = ref(false)
+
+  const go_register = () => {
+    active.value = !active.value;
+    setTimeout(() => {active.value = false}, 500)
+  }
 
   const form_data = reactive([
     {
@@ -53,21 +64,24 @@
   const rules = computed(() => {
     return {
       email: { required : helpers.withMessage('Поле электронной почты обязательное', required),
-               email:  helpers.withMessage('Invalid email format', email), },
+               email:  helpers.withMessage('Неверный формат электронной почты', email),
+               maxLength: helpers.withMessage("Слишком много символов", maxLength(50))},
       password: { required: helpers.withMessage('Поле пароля обязательное', required),
-                  minLength: minLength(6) },
+                  minLength: helpers.withMessage('Минимальная длина пароля шесть символов', minLength(6)),
+                  maxLength: helpers.withMessage("Слишком много символов", maxLength(24))},
       nickname: { required: helpers.withMessage('Поле никнейма обязательное', required),
-                  minLength: minLength(3) },
+                  minLength: helpers.withMessage("Минимальная длина никнейма три символа", minLength(3)),
+                  maxLength: helpers.withMessage("Слишком много символов", maxLength(24)),},
     }
   })
 
   const v$ = useVuelidate(rules, user_data)
 
-  console.log(v$.value.$model)
-
 </script>
 
 <style scoped lang="scss">
+
+  @import "assets/enum/conts";
 
   .register-container {
     display: grid;
@@ -88,22 +102,30 @@
 
         :deep(.container-input) {
           width: 100%;
+          max-width: 100%;
           display: grid;
           position: relative;
         }
 
         &:deep(.input) {
           width: 270px;
+          min-width: 272px;
           height: 35px;
           border-radius: 5px;
           border: 1px solid transparent;
           transition: all 250ms ease-in-out;
           background: #e1e1e1;
           text-align: center;
-          font-size: 16px;
+          font-size: $fonts-size__md;
 
-          &.valid {
-            background: red;
+          &.invalid {
+            width: 100%;
+            border: 1px solid red;
+          }
+
+          &.valid:not(:placeholder-shown) {
+            width: 100%;
+            border: 1px solid green;
           }
 
           &:focus {
@@ -137,6 +159,38 @@
           color: rgba(225, 225, 225, 0.8);
           transform: translateY(-30px);
         }
+
+        &:deep(.form-error) {
+          position: absolute;
+          transition: all 50ms ease-in-out;
+          transform: translateY(-30px);
+        }
+
+        &:deep(.form-error+input+.input_label) {
+          opacity: 0;
+        }
+
+        &:deep(.info-error) {
+          color: red;
+          text-align: center;
+          white-space: nowrap;
+          font-size: $fonts-size__md;
+        }
+      }
+    }
+
+    .go-register {
+      width: 100%;
+      height: 33px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: $fonts-size__md;
+      background-color: #55a3ec;
+      transition: all 400ms ease-in-out;
+
+      &.active {
+        background-color: red;
       }
     }
   }

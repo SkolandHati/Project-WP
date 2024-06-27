@@ -12,10 +12,18 @@ h1, h2, h3, h4, h5, h6{
  padding: 0;
 }
 
+//Размеры текста
+
+$fonts-size__md: 16px;
+
 //Повсеместный цвет элементов
 $base_color: #313142;
 
 $base_color_white: #e1e1e1;
+
+$base_color_buttons: #ff0000;
+
+$base_color_buttons_deep_blue: #55a3ec;
 
 //Стиль активного состояния FilterOrder правых кнопок
 
