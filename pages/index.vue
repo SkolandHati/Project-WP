@@ -17,6 +17,19 @@
   import Menu from "~/components/header/HeaderPanel.vue";
   import Content from "~/components/content/Content.vue";
 
+  useHead({
+    meta: [
+      { name: 'description', content: 'https://www.warfpay.com/' }
+    ],
+  })
+
+  useSeoMeta({
+    title: "WarfPay",
+    ogTitle: 'WarfPay',
+    description: "WarfPay",
+    ogUrl: "https://www.warfpay.com/"
+  })
+
 </script>
 
 <style scoped lang="scss">

@@ -29,16 +29,32 @@
 <script setup>
 
   import { reactive, ref } from "vue"
-  import { required, email, minLength, maxLength, helpers } from '@vuelidate/validators';
+  import { required, email, minLength, maxLength, helpers, sameAs } from '@vuelidate/validators';
   import { useVuelidate } from '@vuelidate/core';
+  import { create_client } from "~/store/modules/CreateClient.js";
+  import { useStore } from "~/store/pinia/StoreUserData.js";
   import UiButtonRegister from "~/components/kit/UiButtonRegister.vue";
 
-  const active = ref(false)
-
-  const go_register = () => {
-    active.value = !active.value;
-    setTimeout(() => {active.value = false}, 500)
+  const go_register = async () => {
+    try {
+      active.value = !active.value;
+      await Promise.all([
+        create_client(user_data.email, user_data.password, user_data.nickname),
+        store.create_client(user_data),
+      ])
+      $ajax({
+        method: "POST",
+      })
+      setTimeout(() => {active.value = false}, 250)
+    }
+    catch (error) {
+      return error.value = error.message;
+    }
   }
+
+  const active = ref(false)
+  const error = ref(false)
+  const store = useStore()
 
   const form_data = reactive([
     {
@@ -50,26 +66,38 @@
       placeholder: "password",
     },
     {
+      label: "Confirm Password",
+      placeholder: "confirm_password",
+    },
+    {
       label: "Nickname",
       placeholder: "nickname",
     }
   ])
 
   const user_data = reactive({
+    id: "1",
     email: "",
     password: "",
-    nickname: ""
+    confirm_password: "",
+    nickname: "",
+    token: 'ewfwefew',
+    admin: false
   })
 
   const rules = computed(() => {
     return {
-      email: { required : helpers.withMessage('Поле электронной почты обязательное', required),
-               email:  helpers.withMessage('Неверный формат электронной почты', email),
+      email: { required : helpers.withMessage("Поле электронной почты обязательное", required),
+               email:  helpers.withMessage("Неверный формат электронной почты", email),
                maxLength: helpers.withMessage("Слишком много символов", maxLength(50))},
-      password: { required: helpers.withMessage('Поле пароля обязательное', required),
-                  minLength: helpers.withMessage('Минимальная длина пароля шесть символов', minLength(6)),
+      password: { required: helpers.withMessage("Поле пароля обязательное", required),
+                  minLength: helpers.withMessage("Минимальная длина пароля шесть символов", minLength(6)),
                   maxLength: helpers.withMessage("Слишком много символов", maxLength(24))},
-      nickname: { required: helpers.withMessage('Поле никнейма обязательное', required),
+      confirm_password: {
+                required: helpers.withMessage("Введите пароль повторно", required),
+                someAsPassword: helpers.withMessage("Пароли должны совпадать", sameAs(user_data.password))
+      },
+      nickname: { required: helpers.withMessage("Поле никнейма обязательное", required),
                   minLength: helpers.withMessage("Минимальная длина никнейма три символа", minLength(3)),
                   maxLength: helpers.withMessage("Слишком много символов", maxLength(24)),},
     }
@@ -190,7 +218,7 @@
       transition: all 400ms ease-in-out;
 
       &.active {
-        background-color: red;
+        background-color: #63b88d;
       }
     }
   }
