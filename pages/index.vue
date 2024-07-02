@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 
+  import { useStore } from "~/store/pinia/StoreUserData";
   import Menu from "~/components/header/HeaderPanel.vue";
   import Content from "~/components/content/Content.vue";
 
@@ -29,6 +30,12 @@
     description: "WarfPay",
     ogUrl: "https://www.warfpay.com/"
   })
+
+  onMounted(() => {
+    store.get_user_data
+  })
+
+  const store = useStore();
 
 </script>
 

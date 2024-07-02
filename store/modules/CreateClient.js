@@ -16,10 +16,15 @@ export const add_client_database = async (user_data) => {
     try {
         let { error } = await supabase
             .from('users')
-            .insert([user_data])
+            .insert([{id: user_data.id,
+                             email: user_data.email,
+                             password: user_data.password,
+                             nickname: user_data.nickname,
+                             admin: user_data.admin,
+                             token: user_data.token,}])
             .select()
 
-        if (error) throw "Неверно введены данные"
+        if (error) throw error
     }
     catch (error) {
         return error

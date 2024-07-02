@@ -3,7 +3,7 @@
   <div class="register-container">
 
     <h1 class="register-head">Регистрация</h1>
-    <form @submit.prevent="submit_form" class="form-example"
+    <form class="form-example"
           method="post">
 
       <div class="form-group">
@@ -47,7 +47,7 @@
     }
   }
 
-  const go_register = async () => {
+  const go_register = async function() {
     active.value = !active.value;
     await Promise.all([
       create_client(user_data.email, user_data.password, user_data.nickname),
@@ -99,7 +99,7 @@
                   maxLength: helpers.withMessage("Слишком много символов", maxLength(24))},
       confirm_password: {
                 required: helpers.withMessage("Введите пароль повторно", required),
-                someAsPassword: helpers.withMessage("Пароли должны совпадать", sameAs(user_data.confirm_password))
+                someAsPassword: helpers.withMessage("Пароли должны совпадать", sameAs(user_data.password))
       },
       nickname: { required: helpers.withMessage("Поле никнейма обязательное", required),
                   minLength: helpers.withMessage("Минимальная длина никнейма три символа", minLength(3)),
