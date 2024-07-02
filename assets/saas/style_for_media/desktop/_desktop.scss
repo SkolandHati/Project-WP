@@ -10,6 +10,20 @@
          }
        }
     }
+
+    section {
+      .container {
+        .filter-container {
+          .filter-item {
+            margin: 12px 0 0 0;
+          }
+        }
+
+        .container-order-unit {
+          margin: 0;
+        }
+      }
+    }
   }
     .title_h2{
       font-size:calc(24px + 8 * (100vw - 320px) / 880);

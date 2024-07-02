@@ -19,7 +19,7 @@ export const add_client_database = async (user_data) => {
             .insert([user_data])
             .select()
 
-        if (error) throw error
+        if (error) throw "Неверно введены данные"
     }
     catch (error) {
         return error

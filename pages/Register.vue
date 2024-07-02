@@ -3,7 +3,7 @@
   <div class="register-container">
 
     <h1 class="register-head">Регистрация</h1>
-    <form class="form-example"
+    <form @submit.prevent="submit_form" class="form-example"
           method="post">
 
       <div class="form-group">
@@ -19,7 +19,8 @@
 
     <UiButtonRegister>
       <button class="go-register"
-              @click="go_register" :class="{active: active}">Зарегистрироваться</button>
+              @click="submit_form"
+              :class="{active: active}">Зарегистрироваться</button>
     </UiButtonRegister>
 
   </div>
@@ -35,25 +36,28 @@
   import { useStore } from "~/store/pinia/StoreUserData.js";
   import UiButtonRegister from "~/components/kit/UiButtonRegister.vue";
 
-  const go_register = async () => {
+  const submit_form = () => {
     try {
-      active.value = !active.value;
-      await Promise.all([
-        create_client(user_data.email, user_data.password, user_data.nickname),
-        store.create_client(user_data),
-      ])
-      $ajax({
-        method: "POST",
-      })
-      setTimeout(() => {active.value = false}, 250)
+      v$.value.$touch()
+      if (v$.value.$error) return
+      go_register()
     }
     catch (error) {
-      return error.value = error.message;
+      return  errors.value = error.message
     }
   }
 
+  const go_register = async () => {
+    active.value = !active.value;
+    await Promise.all([
+      create_client(user_data.email, user_data.password, user_data.nickname),
+      store.create_client(user_data),
+    ])
+    setTimeout(() => {active.value = false}, 250)
+  }
+
   const active = ref(false)
-  const error = ref(false)
+  const errors = ref(false)
   const store = useStore()
 
   const form_data = reactive([
@@ -95,7 +99,7 @@
                   maxLength: helpers.withMessage("Слишком много символов", maxLength(24))},
       confirm_password: {
                 required: helpers.withMessage("Введите пароль повторно", required),
-                someAsPassword: helpers.withMessage("Пароли должны совпадать", sameAs(user_data.password))
+                someAsPassword: helpers.withMessage("Пароли должны совпадать", sameAs(user_data.confirm_password))
       },
       nickname: { required: helpers.withMessage("Поле никнейма обязательное", required),
                   minLength: helpers.withMessage("Минимальная длина никнейма три символа", minLength(3)),

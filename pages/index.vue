@@ -35,7 +35,9 @@
 <style scoped lang="scss">
 
   @import "assets/saas/style_for_media/mobile/mobile";
+  @import "assets/saas/style_for_media/desktop/desktop";
 
   @include mobile;
+  @include desktop;
 
 </style>
