@@ -30,10 +30,11 @@
 <script setup>
 
   import { reactive, ref } from "vue"
-  import { required, email, minLength, maxLength, helpers, sameAs } from '@vuelidate/validators';
-  import { useVuelidate } from '@vuelidate/core';
+  import { required, email, minLength, maxLength, helpers, sameAs } from "@vuelidate/validators";
+  import { useVuelidate } from "@vuelidate/core";
   import { create_client } from "~/store/modules/CreateClient.js";
   import { useStore } from "~/store/pinia/StoreUserData.js";
+  import { useRouter } from "vue-router";
   import UiButtonRegister from "~/components/kit/UiButtonRegister.vue";
 
   const submit_form = () => {
@@ -59,6 +60,7 @@
   const active = ref(false)
   const errors = ref(false)
   const store = useStore()
+  const route = useRouter()
 
   const form_data = reactive([
     {
@@ -81,10 +83,10 @@
 
   const user_data = reactive({
     id: "1",
-    email: "",
-    password: "",
-    confirm_password: "",
-    nickname: "",
+    email: "test@mail.ru",
+    password: "34324dsggds",
+    confirm_password: "34324dsggds",
+    nickname: "Marcus",
     token: 'ewfwefew',
     admin: false
   })

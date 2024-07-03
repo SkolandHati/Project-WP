@@ -1,16 +1,14 @@
 <template>
   <nav class="menu">
-    <ul v-if="user_data.token" class="list-items__authenticated">
+    <ul v-if="user_data.session" class="list-items__authenticated">
       <li class="item">
         <a>Профиль</a>
       </li>
       <li class="item">
         <a>Ордера</a>
       </li>
-      <li class="item">
-        <a>Настройки</a>
-      </li>
-      <li class="item">
+      <li class="item"
+          @click="logout_account">
         <a>Выход</a>
       </li>
     </ul>
@@ -29,12 +27,13 @@
   </nav>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
-  import {useStore} from "~/store/pinia/StoreUserData";
-  import {useRouter} from "vue-router";
+  import { useStore } from "~/store/pinia/StoreUserData";
+  import { useRouter } from "vue-router";
 
   const user_data = useStore().$state.user;
+  const state = useStore()
 
   const route = useRouter();
 
@@ -43,7 +42,12 @@
   }
 
   const go_register = async () => {
-    await route.push(`/register`);
+    await route.push(`/Auth`);
+  }
+
+  const logout_account = async () => {
+    await state.logout_account
+    await window.location.reload()
   }
 
 </script>
@@ -66,7 +70,7 @@
       .item {
         text-align: center;
         padding: 10px;
-        min-width: 100px;
+        min-width: 170px;
         height: 20px;
         list-style-type: none;
         background-color: white;

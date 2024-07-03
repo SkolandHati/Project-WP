@@ -12,11 +12,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
-  import { useStore } from "~/store/pinia/StoreUserData";
-  import Menu from "~/components/header/HeaderPanel.vue";
-  import Content from "~/components/content/Content.vue";
+  import { useStore } from "@/store/pinia/StoreUserData";
+  import Menu from "@/components/header/HeaderPanel.vue";
+  import Content from "@/components/content/Content.vue";
 
   useHead({
     meta: [
@@ -32,10 +32,15 @@
   })
 
   onMounted(() => {
-    store.get_user_data
+    Promise.all([
+      store.get_user_data,
+      store.session_state
+    ])
   })
 
   const store = useStore();
+
+  console.log(store.user)
 
 </script>
 
