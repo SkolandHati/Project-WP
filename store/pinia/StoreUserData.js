@@ -37,7 +37,7 @@ export const useStore = defineStore('user', {
         session_state: async (state) => {
             try {
                 let session = await supabase.auth.getSession()
-                if (session) state.user.session = true
+                if (session.data.session) state.user.session = true
             }
             catch (error) {
                 return error.message

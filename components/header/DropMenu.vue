@@ -1,27 +1,23 @@
 <template>
   <nav class="menu">
-    <ul v-if="user_data.session" class="list-items__authenticated">
-      <li class="item">
-        <a>Профиль</a>
-      </li>
-      <li class="item">
-        <a>Ордера</a>
-      </li>
-      <li class="item"
-          @click="logout_account">
-        <a>Выход</a>
-      </li>
+    <ul v-if="user_data.session"
+        class="list-items__authenticated">
+      <UiButtonsItem v-for="(item, index) in route_authenticated"
+                     :key="index"
+                     :class_name="'item'"
+                     :label="'fwe'"
+                     :route_path="`/Auth`"
+                     :metadata="''"></UiButtonsItem>
     </ul>
 
     <ul v-else class="list-items__guest">
-      <li class="item"
-          @click="user_profile">
-        <a>Войти</a>
-      </li>
-      <li class="item"
-          @click="go_register">
-        <a>Зарегистрироваться</a>
-      </li>
+      <UiButtonsItem v-for="(item, index) in route_guest"
+                     :key="index"
+                     :class_name="'item'"
+                     :label="item.label"
+                     :route_path="item.path"
+                     :metadata="item.metadata">
+      </UiButtonsItem>
     </ul>
 
   </nav>
@@ -29,26 +25,15 @@
 
 <script setup>
 
-  import { useStore } from "~/store/pinia/StoreUserData";
+  import { useStore } from "@/store/pinia/StoreUserData";
   import { useRouter } from "vue-router";
+  import { route_guest, route_authenticated } from "@/store/enumJS/router/route.js"
+  import UiButtonsItem from "~/components/slots/UiButtonsItem.vue";
+
 
   const user_data = useStore().$state.user;
   const state = useStore()
-
-  const route = useRouter();
-
-  const user_profile = async () => {
-    await route.push(`/${user_data.nickname}`);
-  }
-
-  const go_register = async () => {
-    await route.push(`/Auth`);
-  }
-
-  const logout_account = async () => {
-    await state.logout_account
-    await window.location.reload()
-  }
+  console.log(route_guest)
 
 </script>
 
